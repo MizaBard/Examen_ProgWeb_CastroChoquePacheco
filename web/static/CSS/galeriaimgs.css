@@ -1,0 +1,80 @@
+/* titulo que dice galeria  de imagenes */
+h1{
+    color:white;
+    text-shadow: 1px 2px 2px black, 0 0 25px;
+    text-align: center;
+}
+/* toda la galeria (contiene todo lo que está en la galería i mean , tooooooooooooodoooooooooooo) */
+.section{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    gap: 10px;
+    justify-content: center;
+    padding: 10px;
+}
+/* formato de letra de titulo de imagen  */
+h2 {
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+/* contenedor de imagen */
+.card {
+    margin: 10px;
+    width: 100%;
+    height: 450px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+/* tarjeta de imagen  */
+.card img {
+    aspect-ratio: 4/3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* el contenedor de la imagen y el texto */
+.card-container {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 2);
+    border-radius: 10px;
+}
+/* metodo para rotar el contenedor */
+.card .card-container.is-flipped {
+    transform: rotateY(180deg);
+}
+/* es la configuracion para lo que será la cara visible del contenido */
+.card-face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #a4b4b4;
+}
+/* contenedor para la informacion de cada dibujo */
+.contenedor-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0 0 0;
+    padding: 20px;
+}
+/* para que rote u muestre la cara frontal de esta */
+.front-face {
+    transform: rotateY(0deg);
+}
+/* que rote y muestre la cara trasera o sea hará un giro de 180° */
+.back-face {
+    display: flex;
+    transform: rotateY(180deg);
+}

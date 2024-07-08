@@ -1,0 +1,31 @@
+.container .title {
+    font-size: 20px;
+    font-weight: 200;
+    text-align: center;
+    font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+    font-style: italic; /* Agrega cursiva */
+}
+
+.container {
+    max-width: 600px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario en la página */
+    padding: 0 20px; /* Espacio alrededor del formulario */
+}
+
+.container .container_box {
+    text-align: center;
+    margin-bottom: 20px; /* Espacio entre cada campo del formulario */
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%; /* Cambia el ancho máximo del formulario en pantallas más pequeñas */
+        padding: 0 10px; /* Reduce el espacio alrededor del formulario en pantallas más pequeñas */
+    }
+
+    .container .container_box {
+        text-align: left; /* Alinea los campos del formulario a la izquierda en pantallas más pequeñas */
+    }
+}
+
+/* faltan modificar cositas */

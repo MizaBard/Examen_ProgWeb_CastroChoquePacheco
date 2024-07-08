@@ -1,0 +1,27 @@
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-fill {
+    flex: 1;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+img {
+    width: 100%;
+    max-width: 200px; /* Ajusta el ancho máximo de la imagen según sea necesario */
+    height: auto; /* Mantiene la proporción de aspecto de la imagen */
+    margin-right: 20px; /* Ajusta el margen entre la imagen y el texto */
+}
+
+p {
+    font-size: 16px; /* Ajusta el tamaño de la fuente del texto */
+    margin-left: 2000px; /* Ajusta el margen entre la imagen y el texto */
+}

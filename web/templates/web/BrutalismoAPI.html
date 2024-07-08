@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap, iconos de bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- hojas de estilos, css, fuentes, colores-->
+    <link rel="stylesheet" href="{% static '/CSS/menu.css' %}">
+    <link rel="stylesheet" href="{% static '/CSS/style_footer.css' %}">
+    <link rel="stylesheet" href="{% static '/CSS/brutalismoAPI.css' %}">
+    <!-- fin de imports de estilo (css) -->
+    <!-- Favicon, icono de la pestaña, luego va el tamaño(para diferentes tipo de dispositivo)-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/imgs/favicon/apple-touch-icon.png' %}"><!-- este es para apple-->
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/imgs/favicon/avicon-32x32.png' %}"><!-- este es para windows-->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/imgs/favicon/favicon-16x16.png' %}"><!-- este es para android-->
+    <link rel="manifest" href="{% static '/imgs/favicon/site.webmanifest' %}">
+    <!-- fin Favicon -->
+
+    <title>Xan Proxy</title>
+</head>
+<body>
+    <!-- menu -->
+    <header class="header"> <!--Clase header-->
+        <nav> <!--Nav viene de la palabra navigator o sea esta nos mandará a los links que esten dentro de esta misma o los podemos redireccionar donde sea deseado-->
+            <ul class="sidebar"> <!--Clase barra lateral, contiene una lista y anclas(anchors) a las otras paginas de nuestro sitio web-->
+                <li onclick=hideSidebar()><a href="#"><i class="bi bi-x-lg"></i></a></li>
+                <li><a href="{% url 'index' %}">Inicio</a></li> <!-- link a index-->
+                <li><a href="{% url 'info' %}">Sobre Xan</a></li><!-- link a info chan-->
+                <li><a href="{% url 'portafolio' %}">Portafolio</a></li><!-- link a portafolio de imagenes-->
+                <li><a href="{% url 'patreon' %}">Comisiones</a></li> <!--Link a patreon-->
+                <!-- <li><a href="{% url 'registro' %}">Registro</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li> -->
+                <li><a class="not-active">Referencias</a></li>
+
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'logout' %}">Cerrar sesión</a>
+                </li>
+                <li>
+                    <a href="#">@{{ user.username }}</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Iniciar sesión</a>
+                </li>
+                {% endif %}
+
+                
+            </ul> <!--unordered list -->
+            <ul> <!--Esto cambia si es que lo veo de mi dispositivo movil  y me agrega un pequeño boton de menu lateral en la esquina superior izquierda-->
+                <li><img src="{% static '/imgs/logo-xan-proxy.png' %}" alt="logo"></li>
+                <li class="hideOnMobile"><a href="{% url 'index' %}">Inicio</a></li>
+                <li class="hideOnMobile"><a href="{% url 'info' %}">Sobre Xan</a></li>
+                <li class="hideOnMobile"><a href="{% url 'portafolio' %}">Portafolio</a></li>
+                <li class="hideOnMobile"><a href="{% url 'patreon' %}">Comisiones</a></li>
+                <!-- <li class="hideOnMobile"><a href="{% url 'registro' %}">Registro</a></li>
+                <li class="hideOnMobile"><a href="{% url 'login' %}">Login</a></li> -->
+                <li class="hideOnMobile"><a>Referencias</a></li>
+                
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'logout' %}">Cerrar sesión</a>
+                </li>
+                <li>
+                    <a href="#">@{{ user.username }}</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Iniciar sesión</a>
+                </li>
+                {% endif %}
+
+
+                <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                  </svg></i></a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <h1>Referentes del Brutalismo</h1>
+    <div id="architects"></div>
+
+    <!-- Inicio Footer -->
+    <footer class="pie"> <!--se inicia creacion de footer -->
+        <div class="grupo-1"><!--division de la imagen izquierda xan's proxy -->
+            <div class="caja"> <!--division para el contenedor de el logo correspondiente en la parte izquierda de nuestro footer -->
+                <figure><!-- apertura figura  -->
+                    <img src="{% static '/imgs/logo-xan-proxy.png' %}" alt="logo xan proxy"><!--se añade la imagen o logo correspondiente a esta -->
+                </figure><!--cierre de ingreso de logo -->
+            </div><!-- cierre de division de la figura -->
+            <div class="caja"> <!-- caja para agregar a los integrantes-->
+                <h2>Integrantes</h2> <!-- Titulo pequeño para mostrar sobre los integrantes-->
+                <p>Sthefanie "Sami" Castro <br>Jonathan "Dexus" Choque <br>Diego "Miza" Pacheco</p><!-- integrante-->
+                <p></p><!-- integrante-->
+                <p></p><!-- integrante-->
+            </div><!--cierre division caja -->
+            <div class="caja"> <!--nueva caja para los links de interés -->
+                <h2>Siguenos</h2><!--titulo de esta en tamaño h2--> 
+                <div class="redes"> <!--clase redes -->
+                    <a href="https://github.com/MizaBard" target="_blank"><i class="bi bi-github"></i></a><!--ancla(anchor) github -->
+                    <a href="https://www.instagram.com/purenonsince/" target="_blank"><i class="bi bi-instagram"></i></a><!--ancla(anchor) instagram -->
+                    <a href="https://twitter.com/MizaSenpai" target="_blank"><i class="bi bi-twitter-x"></i></a><!--ancla(anchor) Twitter "X"(actualmente)-->
+                </div><!--cierre de clase redes  -->
+            </div><!--cierre de la caja -->
+        </div><!--Cierre de clase grupo 1 es la parte "superior" de nuestro footer"pie de página" -->
+        <div class="grupo-2"><!--abrimos otra division para la parte inferior de nuestro footer(pie de página) -->
+            <small>&copy; 2024 <b>Xan Proxy</b> - Todos los derechos reservados.</small><!--(small comentario pequeño), b(texto el cual no afectará)añade texto extra -->
+        </div><!--cierre de la division  -->
+    </footer> <!--cierre de seccion de footer -->
+    <!-- Fin Footer -->
+
+<!-- inicio de funciones de javascript para el header-->
+    <script> /*apertura de javascript */
+        function showSidebar(){
+          const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'flex'
+        }
+        function hideSidebar(){
+           const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'none'
+        }   
+    </script><!--cierre de javascript -->
+
+    <script>
+        // URL de la API
+        const apiUrl = 'http://127.0.0.1:5000/api/architects';
+
+        // Función para obtener datos de la API
+        async function fetchArchitects() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                displayArchitects(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Función para mostrar los datos en el HTML
+        function displayArchitects(architects) {
+            const container = document.getElementById('architects');
+            architects.forEach(architect => {
+                const architectDiv = document.createElement('div');
+                architectDiv.classList.add('architect');
+                const name = document.createElement('h2');
+                name.textContent = architect.name;
+                architectDiv.appendChild(name);
+                architect.images.forEach(image => {
+                    const img = document.createElement('img');
+                    img.src = `http://127.0.0.1:5000${image}`;
+                    architectDiv.appendChild(img);
+                });
+                container.appendChild(architectDiv);
+            });
+        }
+
+        // Llamar a la función para obtener y mostrar los datos
+        fetchArchitects();
+    </script>
+</body>
+</html>
