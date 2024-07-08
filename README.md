@@ -1,2 +1,2 @@
-# EA3_ProgWeb_CastroChoquePacheco
-Experiencia de aprendizaje 3 - Programación Web - Duoc UC 2024
+# ET_ProgWeb_CastroChoquePacheco
+Examen Transversal - Programación Web - Duoc UC 2024
