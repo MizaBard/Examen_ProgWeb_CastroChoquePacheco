@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Usuario
+from .models import Producto, Usuario
 
 # Create your views here.
 
@@ -10,7 +10,11 @@ def info(request):
     return render(request, 'web/infoChan.html')
 
 def portafolio(request):
-    return render(request, 'web/portfolio.html')
+    productos = Producto.objects.all()
+    data = {
+        'productos' : productos
+    }
+    return render(request, 'web/portfolio.html', data)
 
 def patreon(request):
     return render(request, 'web/patreon.html')
