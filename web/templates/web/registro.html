@@ -35,6 +35,8 @@
                 <li><a class="not-active">Registro</a></li> <!--Link a registro-->
                 <li><a href="{% url 'login' %}">Login</a></li>
                 <li><a href="{% url 'referencia' %}">Referencias</a></li>
+                <li><a href="{% url 'agregar_producto' %}">Agregar Prod.</a></li>
+                <li><a href="{% url 'listar_producto' %}">Listado de Prod.</a></li>
             </ul> <!--unordered list -->
             <ul> <!--Esto cambia si es que lo veo de mi dispositivo movil  y me agrega un pequeño boton de menu lateral en la esquina superior izquierda-->
                 <li><img src="{% static '/imgs/logo-xan-proxy.png' %}" alt="logo"></li>
@@ -45,6 +47,8 @@
                 <li class="hideOnMobile"><a>Registro</a></li>
                 <li class="hideOnMobile"><a href="{% url 'login' %}">Login</a></li>
                 <li class="hideOnMobile"><a href="{% url 'referencia' %}">Referencias</a></li>
+                <li class="hideOnMobile"><a href="{% url 'agregar_producto' %}">Agregar Prod.</a></li>
+                <li class="hideOnMobile"><a href="{% url 'listar_producto' %}">Listado de Prod.</a></li>
                 <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                   </svg></i></a></li>

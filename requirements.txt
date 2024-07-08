@@ -3,3 +3,4 @@ flask-cors
 setuptools
 crispy-bootstrap4
 pillow
+django-crispy-forms

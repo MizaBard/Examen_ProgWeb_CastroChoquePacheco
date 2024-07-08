@@ -34,6 +34,8 @@
                 <!-- <li><a href="{% url 'registro' %}">Registro</a></li>
                 <li><a href="{% url 'login' %}">Login</a></li> -->
                 <li><a href="{% url 'referencia' %}">Referencias</a></li>
+                <li><a href="{% url 'agregar_producto' %}">Agregar Prod.</a></li>
+                <li><a href="{% url 'listar_producto' %}">Listado de Prod.</a></li>
                 
                 {% if user.is_authenticated %}
                 <li>
@@ -58,7 +60,8 @@
                 <!-- <li class="hideOnMobile"><a href="{% url 'registro' %}">Registro</a></li>
                 <li class="hideOnMobile"><a href="{% url 'login' %}">Login</a></li> -->
                 <li class="hideOnMobile"><a href="{% url 'referencia' %}">Referencias</a></li>
-
+                <li class="hideOnMobile"><a href="{% url 'agregar_producto' %}">Agregar Prod.</a></li>
+                <li class="hideOnMobile"><a href="{% url 'listar_producto' %}">Listado de Prod.</a></li>
                 {% if user.is_authenticated %}
                 <li>
                     <a href="{% url 'logout' %}">Cerrar sesión</a>
