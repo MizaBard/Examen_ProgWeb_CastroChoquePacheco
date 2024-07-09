@@ -17,9 +17,20 @@ def info(request):
 
 def portafolio(request):
     productos = Producto.objects.all()
+
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(productos, 4)
+        productos = paginator.page(page)
+    except:
+        raise Http404
+
     data = {
-        'productos' : productos
+        'entity' : productos,
+        'paginator' : paginator
     }
+
     return render(request, 'web/portfolio.html', data)
 
 
