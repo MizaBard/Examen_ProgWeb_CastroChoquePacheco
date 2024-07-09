@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
+from django.db.models import Q
 
 # Create your views here.
 
@@ -16,12 +17,21 @@ def info(request):
     return render(request, 'web/infoChan.html')
 
 def portafolio(request):
+    
+    busqueda = request.POST.get("buscar")
     productos = Producto.objects.all()
+
+    if busqueda:
+        productos = Producto.objects.filter(
+            Q(nombre__icontains = busqueda) |
+            Q(descripcion__icontains = busqueda) |
+            Q(precio__icontains = busqueda)
+        ).distinct()
 
     page = request.GET.get('page', 1)
 
     try:
-        paginator = Paginator(productos, 4)
+        paginator = Paginator(productos, 10)
         productos = paginator.page(page)
     except:
         raise Http404
