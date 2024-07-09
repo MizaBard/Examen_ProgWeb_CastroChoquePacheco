@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- bootstrap, iconos de bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">   
     <!-- hojas de estilos, css, fuentes, colores-->
     <link rel="stylesheet" href="{% static '/CSS/menu.css' %}">
     <link rel="stylesheet" href="{% static '/CSS/style_footer.css' %}">
@@ -35,8 +36,13 @@
                 <li><a class="not-active">Registro</a></li> <!--Link a registro-->
                 <li><a href="{% url 'login' %}">Login</a></li>
                 <li><a href="{% url 'referencia' %}">Referencias</a></li>
+                {% if perms.web.add_producto %}
                 <li><a href="{% url 'agregar_producto' %}">Agregar Prod.</a></li>
+                {% endif %}
+
+                {% if perms.web.view_producto %}
                 <li><a href="{% url 'listar_producto' %}">Listado de Prod.</a></li>
+                {% endif %}
             </ul> <!--unordered list -->
             <ul> <!--Esto cambia si es que lo veo de mi dispositivo movil  y me agrega un pequeño boton de menu lateral en la esquina superior izquierda-->
                 <li><img src="{% static '/imgs/logo-xan-proxy.png' %}" alt="logo"></li>
@@ -47,8 +53,12 @@
                 <li class="hideOnMobile"><a>Registro</a></li>
                 <li class="hideOnMobile"><a href="{% url 'login' %}">Login</a></li>
                 <li class="hideOnMobile"><a href="{% url 'referencia' %}">Referencias</a></li>
+                {% if perms.web.add_producto %}
                 <li class="hideOnMobile"><a href="{% url 'agregar_producto' %}">Agregar Prod.</a></li>
+                {% endif %}
+                {% if perms.web.view_producto %}
                 <li class="hideOnMobile"><a href="{% url 'listar_producto' %}">Listado de Prod.</a></li>
+                {% endif %}
                 <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                   </svg></i></a></li>
@@ -57,54 +67,26 @@
     </header>
 
     <!-- Inicio Formulario-->
-    <form class="container" action="{% url 'registro' %}" method="POST" id="registrationForm"> 
-        {% csrf_token %}
-        <br>
-        <div class="title"><h2>Formulario de Registro</h2></div>
-        <br>
-        <br>
-        <br>
-        <div class="container_box">
-            
-            <label for="rut">Rut:</label><br>
-            <input type="text" id="rut" name="rut" ><br><br>
-
-        </div>
-        <br>
-        <div class="container_box">
-            
-            <label for="nombre">Nombre:</label><br>
-            <input type="text" id="nombre" name="nombre" ><br><br>
-
-        </div>
-        <br> 
-        <div class="container_box">   
-
-            <label for="email">Correo Electrónico:</label><br>
-            <input type="email" id="email" name="email"><br><br>
-
-        </div>
-        <br>
-        <div class="container_box">    
-            <label for="password">Contraseña:</label><br>
-            <input type="password" id="password" name="contraseña"><br><br>
-        </div>
-        <br>
-        <div class="container_box">
-
-            <label for="telefono">Teléfono:</label><br>
-            <input type="number" id="telefono" name="telefono"><br><br>
-
-        </div>
-        <br>
-            <div class="container_box">            
-               <button type="submit">Registrarse</button>
+    {% load crispy_forms_tags %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12  offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Registro de usuario</h2>
+                        <hr>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <a href="{% url 'index' %}">ir al Home</a> | 
+                            <a href="{% url 'login' %}">Iniciar sesion</a>
+                            <input type="submit" value="registrar" class="btn btn-success float-right">
+                        </form> 
+                    </div>
+                </div>
             </div>
-            {% if success %}
-            <p>Registro exitoso. ¡Bienvenido!</p>
-            {% endif %}
-        
-    </form>
+        </div>
+    </div>
 
      <!-- Inicio Footer -->
      <footer class="pie"> <!--se inicia creacion de footer -->

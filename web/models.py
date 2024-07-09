@@ -12,12 +12,22 @@ class Producto(models.Model):
     def __str__(self):
         return str(self.id)+" "+str(self.nombre)
 
-class Usuario(models.Model):
-    rut = models.CharField(primary_key=True, max_length=10)
-    nombre = models.CharField(max_length=100)
-    email = models.EmailField(max_length=254)
-    contraseña = models.CharField(max_length=50, blank=False, null=False)
-    telefono = models.PositiveIntegerField(default=0)
 
-    def __str__(self):
-        return  str(self.rut)+" " +str(self.nombre)
+
+
+
+
+
+
+
+
+
+# class Usuario(models.Model):
+#     rut = models.CharField(primary_key=True, max_length=10)
+#     nombre = models.CharField(max_length=100)
+#     email = models.EmailField(max_length=254)
+#     contraseña = models.CharField(max_length=50, blank=False, null=False)
+#     telefono = models.PositiveIntegerField(default=0)
+
+#     def __str__(self):
+#         return  str(self.rut)+" " +str(self.nombre)
