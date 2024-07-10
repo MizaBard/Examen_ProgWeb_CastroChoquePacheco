@@ -15,6 +15,8 @@ urlpatterns = [
     path('eliminar-producto/<id>/', eliminar_producto, name="eliminar_producto"),
     path('registro/', registro, name="registro"),
 
+    # path('logout/', auth_views.LogoutView.as_view(), name="logout"),
+
     path('generar-boleta/', generarBoleta, name="generarBoleta"),
     path('agregar/<id>', añadir_carrito, name="añadir_carrito"),
     path('eliminar/<id>', eliminar_carrito, name="eliminar_carrito"),

@@ -45,7 +45,10 @@
 
                 {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url 'logout' %}">Cerrar sesión</a>
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                    </form>
                 </li>
                 <li>
                     <a href="#">@{{ user.username }}</a>
@@ -75,7 +78,10 @@
 
                 {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url 'logout' %}">Cerrar sesión</a>
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                    </form>
                 </li>
                 <li>
                     <a href="">@{{ user.username }}</a>

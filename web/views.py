@@ -4,12 +4,16 @@ from .forms import ProductoForm, CustomUserCreationForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import Http404
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Q
 from web.carrito import Carrito
+# from django.contrib.auth.views import LogoutView
 
 # Create your views here.
+
+# class CustomLogoutView(LogoutView):
+#     template_name = 'web/index.html'
 
 def index(request):
     return render(request, 'web/index.html')
