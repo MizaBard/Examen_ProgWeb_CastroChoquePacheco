@@ -41,7 +41,7 @@ class Carrito:
                 value["cantidad"] = value["cantidad"]-1
                 value["total"] = int(value["total"]) - producto.precio
                 if value["cantidad"] < 1:
-                    self.eliminar(producto)
+                    self.eliminar_carrito(producto)
                 break
         self.guardar_carrito()
 

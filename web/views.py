@@ -174,7 +174,7 @@ def generarBoleta(request):
         producto = Producto.objects.get(id = value['id'])
         cant = value['cantidad']
         subtotal = cant * int(value['precio'])
-        detalle = detalle_boleta(id_boleta = boleta, id = producto, cantidad = cant, subtotal = subtotal)
+        detalle = detalle_boleta(id_boleta = boleta, id_producto = producto, cantidad = cant, subtotal = subtotal)
         detalle.save()
         productos.append(detalle)
     datos= {
