@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto
+from .models import Producto, Boleta, detalle_boleta
 from .forms import ProductoForm, CustomUserCreationForm
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -7,6 +7,7 @@ from django.http import Http404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Q
+from web.carrito import Carrito
 
 # Create your views here.
 
@@ -16,6 +17,8 @@ def index(request):
 def info(request):
     return render(request, 'web/infoChan.html')
 
+
+@login_required
 def portafolio(request):
     
     busqueda = request.POST.get("buscar")
@@ -137,19 +140,49 @@ def eliminar_producto(request,id):
     messages.success(request, "Eliminado correctamente")
     return redirect(to="listar_producto")
 
+def añadir_carrito(request, id):
+    carrito_compra = Carrito(request)
+    producto = Producto.objects.get(id=id)
+    carrito_compra.añadir(producto=producto)
+    return redirect('portafolio')
 
-# def registro(request):
-#     if request.method != "POST":
-#         usuario=Usuario.objects.all()
-#         context={ 'usuario' : usuario }
-#         return render(request, 'web/registro.html') 
-#     else: 
-#         rut = request.POST.get("rut")
-#         nombre = request.POST.get("nombre")
-#         email = request.POST.get("email")
-#         contraseña = request.POST.get("contraseña")
-#         telefono = request.POST.get("telefono")
+def eliminar_carrito(request, id):
+    carrito_compra = Carrito(request)
+    producto = Producto.objects.get(id=id)
+    carrito_compra.eliminar_carrito(producto=producto)
+    return redirect('portafolio')
 
-#         usuario = Usuario.objects.create(rut=rut, nombre=nombre, email=email, contraseña=contraseña, telefono=telefono)
-#         usuario.save()
-#         return render(request, 'web/registro.html', {'success': True})  
+def quitar_carrito(request, id):
+    carrito_compra = Carrito(request)
+    producto = Producto.objects.get(id=id)
+    carrito_compra.quitar(producto=producto)
+    return redirect('portafolio')
+
+def limpiar_carrito(request):
+    carrito_compra = Carrito(request)
+    carrito_compra.limpiar()
+    return redirect('portafolio')
+
+def generarBoleta(request):
+    precio_total = 0
+    for key, value in request.session['carrito'].items():
+        precio_total = precio_total + int(value['precio']) * int(value['cantidad'])
+    boleta = Boleta(total = precio_total)
+    boleta.save()
+    productos = []
+    for key, value in request.session['carrito'].items():
+        producto = Producto.objects.get(id = value['id'])
+        cant = value['cantidad']
+        subtotal = cant * int(value['precio'])
+        detalle = detalle_boleta(id_boleta = boleta, id = producto, cantidad = cant, subtotal = subtotal)
+        detalle.save()
+        productos.append(detalle)
+    datos= {
+        'productos' : productos,
+        'fecha' : boleta.fechaCompra,
+        'total' : boleta.total
+    }
+    request.session['boleta'] = boleta.id_boleta
+    carrito = Carrito(request)
+    carrito.limpiar()
+    return render(request, 'web/detalleCarrito.html', datos)

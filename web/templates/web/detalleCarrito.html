@@ -93,111 +93,35 @@
     </header>
     <!-- Fin menu -->
 
-    <!-- Inicio de imagenes -->
-    <h1>Galeria de imagenes - Sketchs</h1><br> <!--titulo de la pagina --> 
-    {% block buscador %}
 
-    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-    method="POST">
-        {% csrf_token %}
-        <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." name="buscar" value="{{ request.POST.buscar }}">
-            <div class="input-group-append">
-            <button class="btn btn-primary" type="submit">
-                <i class="fas fa-search fa-sm"></i>
-            </button>
-            </div>
-        </div>
-    </form>
-
-    {% endblock buscador %}
-
-    <!-- Carrito -->
-    <div  role="alert">
-        <table class="table table-bordered alert alert-warning">
+    <div class="container">
+        <h3> Detalle de Compra </h3><br><h6>Fecha: {{ fecha }}</h6>
+        <hr>
+        <table class="table">
             <thead>
-                <tr scope="row"class="text-center"><td colspan="3" style="font-weight:bold; font-size:18px">  Carrito </td></tr>
-                <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">Nombre</td>
-                <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">Precio</td>
-                <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">Cantidad</td>
+                <tr>
+                    <th>Código Boleta</th>
+                    <th>Código Producto</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
             </thead>
             <tbody>
-                {% if request.session.carrito.items %}
-                    {% for key, value in request.session.carrito.items %} 
-                        <tr>
-                            <td style="font-size:13px">{{ value.nombre }}</td>
-                            <td style="font-size:13px">{{ value.precio }}</td>
-                            <td style="font-size:13px">{{ value.cantidad}}
-                                <br>
-                                <a href="{% url 'añadir_carrito' value.id %}" class="btn btn-primary">+</a>
-                                <a href="{% url 'quitar_carrito' value.id %}" class="btn btn-warning">-</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Total : </th>
-                            <td colspan="2">$ {{value.total}}</td>
-                        </tr>
-                    {% endfor %}
-                {% else %}
+                {% for prod in productos%}
                 <tr>
-                    <td colspan="3">
-                        <div class="alert alert-info text-center" style="font-weight: bold;">Sin Productos</div>
-                    </td>
+                    <td>{{ prod.id_boleta }}</td>
+                    <td>{{ prod.id_producto }}</td>
+                    <td>{{ prod.cantidad }}</td>
+                    <td>{{ prod.subtotal }}</td>
                 </tr>
-                {% endif %}
+                {% endfor %}
             </tbody>
+               
+            <tr><td><h6>Total Compra: {{ total }}</h6></td>
+            </tr>
         </table>
-        <hr>
-    </div>
-    <div class="row text-center">
-        <div class="col-6">
-            <a href="{% url 'limpiar_carrito' %}" class="btn btn-warning">Limpiar</a> 
-           </div> 
-           <div class="col-6">
-            <a href="{% url 'generarBoleta' %}" class="btn btn-primary">Comprar</a>
-        </div>
     </div>
 
-    <!-- fin carrito -->
-
-
-
-
-
-
-
-
-    {% load humanize %}
-    <section class="section"> <!--apertura de seccion para la galeria de imagenes -->
-        {% for p in entity %}
-        <div class="card" onclick="voltear(this)">    <!--clase card (añade formatos ) -->
-            <div class="card-container"> <!-- clase contenedora -->
-                <div class="card-face front-face"> <!--clase de cara frontal de nuestra imagen -->
-                    {% if p.imagen %}
-                    <img src="{{ p.imagen.url }}" alt=""> <!--source de la imagen -->
-                    {% endif %}
-                </div>
-                <div class="card-face back-face"> <!--clase de la parte trasera de la imagen -->
-                    <div class="contenedor-info"> <!-- clase que tendra el formato de la info en la parte trasera-->
-                        <h4>id:{{ p.id }}</h4>
-                        <h2>{{ p.nombre | title }}</h2> <!--Titulo de la imagen  -->
-                        <p>{{ p.descripcion }}</p><!--Breve descripcion de esta -->
-                        <h4>${{ p.precio | intcomma }}</h4>
-                        <a href="{% url 'añadir_carrito' p.id %}" class="btn btn-success">Agregar <i class="bi bi-basket2-fill"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div> 
-        {% endfor %}  
-    </section>
-
-    <div>
-        {% include 'web/paginator.html' %}
-    </div>   
-    
-
-
-    <!-- Fin de imagenes -->
 
 
 
