@@ -190,3 +190,6 @@ def generarBoleta(request):
     carrito = Carrito(request)
     carrito.limpiar()
     return render(request, 'web/detalleCarrito.html', datos)
+
+
+
