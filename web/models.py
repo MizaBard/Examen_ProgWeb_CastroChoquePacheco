@@ -31,18 +31,19 @@ class detalle_boleta(models.Model):
     def __str__(self):
         return str(self.id_detalle_boleta)
 
+opciones_consultas = [
+    [0, "Comisiones"],
+    [1, "Tatuajes"],
+    [2, "Sugerencias"],
+    [3, "Felicitaciones"],
+    [4, "Reclamos"]
+]
 
+class Contacto(models.Model):
+    nombre = models.CharField(max_length=50)
+    correo = models.EmailField()
+    tipo_consulta = models.IntegerField(choices=opciones_consultas)
+    mensaje = models.TextField()
 
-
-
-
-
-# class Usuario(models.Model):
-#     rut = models.CharField(primary_key=True, max_length=10)
-#     nombre = models.CharField(max_length=100)
-#     email = models.EmailField(max_length=254)
-#     contraseña = models.CharField(max_length=50, blank=False, null=False)
-#     telefono = models.PositiveIntegerField(default=0)
-
-#     def __str__(self):
-#         return  str(self.rut)+" " +str(self.nombre)
+    def __str__(self):
+        return self.nombre

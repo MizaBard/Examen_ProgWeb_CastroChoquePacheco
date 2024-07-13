@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto, Boleta, detalle_boleta
-from .forms import ProductoForm, CustomUserCreationForm
+from .forms import ProductoForm, CustomUserCreationForm, ContactoForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import Http404
@@ -53,7 +53,19 @@ def portafolio(request):
 
 @login_required
 def patreon(request):
-    return render(request, 'web/patreon.html')
+    data = {
+        'form': ContactoForm()
+    }
+
+    if request.method == 'POST':
+        formulario = ContactoForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "Contacto Guardado"
+        else:
+            data["form"] = formulario
+
+    return render(request, 'web/patreon.html', data)
 
 def registro(request):
     data = {
@@ -104,7 +116,7 @@ def listar_producto(request):
     page = request.GET.get('page', 1)
 
     try:
-        paginator = Paginator(productos, 3)
+        paginator = Paginator(productos, 10)
         productos = paginator.page(page)
     except:
         raise Http404
