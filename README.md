@@ -17,3 +17,11 @@ pass: duoc1234
 
 user: purenosense
 pass: testuser
+
+user: test
+pass: 1234duoc
+
+NOTA IMPORTANTE: 
+Para el funcionamiento de la API del apartado de Referencia se debe abrir una terminal en la carpeta BrutalismoAPI e ingresar el siguiente comando: 
+python app.py 
+Con eso, el apartado de referencia deberia mostrar la informacion de la API en el sitio.
