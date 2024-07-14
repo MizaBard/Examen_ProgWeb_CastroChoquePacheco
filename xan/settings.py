@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "web",
+    'API',
+    'rest_framework',
     'crispy_forms',
     'crispy_bootstrap4',
     'django.contrib.humanize',

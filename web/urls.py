@@ -2,6 +2,7 @@ from django.urls import path, include
 from django.contrib.auth import views as auth_views
 # from .views import index, info, portafolio, patreon, referencia, agregar_producto, listar_producto, modificar_producto, eliminar_producto, registro
 from web.views import *
+from . import views
 
 urlpatterns = [
     path('', index, name="index"),
@@ -23,6 +24,7 @@ urlpatterns = [
     path('quitar/<id>', quitar_carrito, name="quitar_carrito"),
     path('limpiar/', limpiar_carrito, name="limpiar_carrito"),
 
+    
     # path('accounts/password_reset/', 
     #     auth_views.PasswordResetView.as_view(template_name='accounts/password_reset.html'), 
     #     name='password_reset'),

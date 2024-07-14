@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Q
 from web.carrito import Carrito
+
 # from django.contrib.auth.views import LogoutView
 
 # Create your views here.
@@ -202,6 +203,3 @@ def generarBoleta(request):
     carrito = Carrito(request)
     carrito.limpiar()
     return render(request, 'web/detalleCarrito.html', datos)
-
-
-

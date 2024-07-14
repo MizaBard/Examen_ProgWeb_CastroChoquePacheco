@@ -4,3 +4,4 @@ setuptools
 crispy-bootstrap4
 pillow
 django-crispy-forms
+djangorestframework
