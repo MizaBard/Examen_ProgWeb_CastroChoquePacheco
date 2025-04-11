@@ -1,0 +1,59 @@
+/* Estilos para los párrafos laterales */
+.parrafo-lateral {
+    width: 100%; /* Ajustar el ancho al 100% */
+}
+
+.right {
+    margin-left: auto; /* Mover el contenedor de texto a la derecha */
+}
+
+.contenedor-texto {
+    background-color: #f0f0f0; /* Color de fondo del contenedor */
+    padding: 20px; /* Espacio alrededor del contenido */
+    border: 1px solid #ccc; /* Borde del contenedor */
+    border-radius: 5px; /* Borde redondeado */
+    box-shadow: 0 2px 4px rgba(214, 7, 7, 0.1); /* Sombra */
+    width: 100%; /* Ajusta el ancho al 100%*/
+    float: right; /* Coloca los contenedores a la derecha */
+    margin-left: 20px; /* Espacio entre el carrusel y los parrafos */
+    clear: both; /* Limpia los flotadores */
+}
+
+/* Media queries para hacer los párrafos laterales responsivos */
+@media (max-width: 768px) {
+    .parrafo-lateral {
+        width: 50%; /* Reducir el ancho en pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 576px) {
+    .parrafo-lateral {
+        width: 90%; /* Ancho casi completo en pantallas aún más pequeñas */
+        position: relative; /* Cambiar a posición relativa para que fluyan con el contenido */
+        transform: none; /* Resetear transform */
+        top: auto; /* Resetear posición superior */
+        margin: 1rem auto; /* Ajustar margen para centrar */
+        justify-content: center;
+        text-align: center; /* Centrar el texto */
+    }
+    
+    .right {
+        position: static; /* Cambiar a posición estática para que fluyan con el contenido */
+        width: auto; /* Ancho automático */
+        margin-top: 1rem; /* Agregar margen superior para separación */
+    }
+
+    .contenedor-texto{
+        max-width: 20rem;
+    }
+
+}
+/* Fin media queries para que sea responsivo
+ */
+
+ .parrafo-lateral img {
+    margin-top: 30px;
+    margin-left: 90px;
+    max-width: 50%; /* Ajusta el tamaño máximo de la imagen al ancho del contenedor */
+    height: auto; /* Permite que la altura se ajuste automáticamente según el ancho */
+}

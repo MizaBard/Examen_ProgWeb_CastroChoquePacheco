@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Le Corbusier",
+        "images": [
+            "/images/le_corbusier1.jpg",
+            "/images/le_corbusier2.jpg"
+        ]
+    },
+    {
+        "name": "Paul Rudolph",
+        "images": [
+            "/images/paul_rudolph1.jpg",
+            "/images/paul_rudolph2.jpg"
+        ]
+    }
+    
+]

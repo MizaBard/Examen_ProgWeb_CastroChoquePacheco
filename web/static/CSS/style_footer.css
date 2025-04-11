@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} 
+ body{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+ }
+
+/* color de fondo del pie de pagina con un ancho del 100% de esta misma */
+.pie{
+    width: 100%;
+    background-color: #3a5a40;
+}
+  /* columna logo */
+.pie .grupo-1{
+    width: 100%;
+    max-width: 1200px; 
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    padding: 0px;
+}
+/* configuracion del logo  */
+.pie .grupo-1 .caja figure{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* ancho de la imagen del logo */
+.pie .grupo-1 .caja figure img{
+    width: 250px;
+}
+/* formato de letra de columna 2 (integrantes)+(siguenos) */
+.pie .grupo-1 .caja h2{
+    padding-top: 15px;
+    color: rgb(255, 255, 255);
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+/* formato de letra (Integrantes) */
+.pie .grupo-1 .caja p{
+    color: white;
+    margin-bottom: 10px;
+}
+/* bloque para los links de redes sociales */
+.pie .grupo-1 .redes a{
+    display: inline-block;
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: rgb(255, 255, 255);
+    margin-right: 10px;
+    background-color: #344e41;
+    text-align: center;
+}
+/* derechos reservados */
+.pie .grupo-2 {
+    background-color: #344e41;
+    text-align: center;
+    color: white;
+}
+/* responsive footer */
+@media screen and (max-width:800px) {
+    .pie .grupo-1{
+        width: 90%;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 30px;
+        padding: 35px 0px;
+    }
+    
+}

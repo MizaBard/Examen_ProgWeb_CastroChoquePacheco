@@ -1,0 +1,256 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head> <!--   ('___')b  -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Hojas de estilos -->
+    <link rel="stylesheet" href="{% static '/CSS/menu.css' %}">
+    <link rel="stylesheet" href="{% static '/CSS/galeriaimgs.css' %}">
+    <link rel="stylesheet" href="{% static '/CSS/style_footer.css' %}">
+    <!-- iconos bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <!-- Favicon --> <!-- iconos para las pestañas-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/imgs/favicon/apple-touch-icon.png' %}"><!-- este es para apple-->
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/imgs/favicon/avicon-32x32.png' %}"><!-- este es para windows-->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/imgs/favicon/favicon-16x16.png' %}"><!-- este es para android-->
+    <link rel="manifest" href="{% static '/imgs/favicon/site.webmanifest' %}">
+    <!-- fin Favicon -->
+
+    <title>Xan Proxy</title>
+
+</head>
+<body>
+
+    <!-- menu -->
+    <header class="header"> <!--Clase header-->
+        <nav> <!--Nav viene de la palabra navigator o sea esta nos mandará a los links que esten dentro de esta misma o los podemos redireccionar donde sea deseado-->
+            <ul class="sidebar"> <!--Clase barra lateral, contiene una lista y anclas(anchors) a las otras paginas de nuestro sitio web-->
+                <li onclick=hideSidebar()><a href="#"><i class="bi bi-x-lg"></i></a></li>
+                <li><a href="{% url 'index' %}">Inicio</a></li> <!-- link a index-->
+                <li><a href="{% url 'info' %}">Sobre Xan</a></li><!-- link a info chan-->
+                <li><a class="not-active">Portafolio</a></li><!-- link a portafolio de imagenes-->
+                <li><a href="{% url 'patreon' %}">Comisiones</a></li> <!--Link a patreon-->
+                <!-- <li><a href="{% url 'registro' %}">Registro</a></li> 
+                <li><a href="{% url 'login' %}">Login</a></li> -->
+                <li><a href="{% url 'referencia' %}">Referencias</a></li>
+                {% if perms.web.add_producto %}
+                <li><a href="{% url 'agregar_producto' %}">Agregar Prod.</a></li>
+                {% endif %}
+
+                {% if perms.web.view_producto %}
+                <li><a href="{% url 'listar_producto' %}">Listado de Prod.</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li>
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                    </form>
+                </li>
+                <li>
+                    <a href="#">@{{ user.username }}</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Iniciar sesión</a>
+                </li>
+                {% endif %}
+
+            </ul> <!--unordered list -->
+            <ul> <!--Esto cambia si es que lo veo de mi dispositivo movil  y me agrega un pequeño boton de menu lateral en la esquina superior izquierda-->
+                <li><img src="{% static '/imgs/logo-xan-proxy.png' %}" alt="logo"></li>
+                <li class="hideOnMobile"><a href="{% url 'index' %}">Inicio</a></li>
+                <li class="hideOnMobile"><a href="{% url 'info' %}">Sobre Xan</a></li>
+                <li class="hideOnMobile"><a>Portafolio</a></li>
+                <li class="hideOnMobile"><a href="{% url 'patreon' %}">Comisiones</a></li> <!--Link a patreon-->
+                <!-- <li class="hideOnMobile"><a href="{% url 'registro' %}">Registro</a></li>
+                <li class="hideOnMobile"><a href="{% url 'login' %}">Login</a></li> -->
+                <li class="hideOnMobile"><a href="{% url 'referencia' %}">Referencias</a></li>
+                {% if perms.web.add_producto %}
+                <li class="hideOnMobile"><a href="{% url 'agregar_producto' %}">Agregar Prod.</a></li>
+                {% endif %}
+                {% if perms.web.view_producto %}
+                <li class="hideOnMobile"><a href="{% url 'listar_producto' %}">Listado de Prod.</a></li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <li>
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                    </form>
+                </li>
+                <li>
+                    <a href="#">@{{ user.username }}</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Iniciar sesión</a>
+                </li>
+                {% endif %}
+
+                <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                  </svg></a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Fin menu -->
+
+    <!-- Inicio de imagenes -->
+    <h1>Galeria de imagenes - Sketchs</h1><br> <!--titulo de la pagina --> 
+    {% block buscador %}
+
+    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+    method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." name="buscar" value="{{ request.POST.buscar }}">
+            <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+            </div>
+        </div>
+    </form>
+
+    {% endblock buscador %}
+
+    <!-- Carrito -->
+    <div  role="alert">
+        <table class="table table-bordered alert alert-warning">
+            <thead>
+                <tr scope="row"class="text-center"><td colspan="3" style="font-weight:bold; font-size:18px">  Carrito </td></tr>
+                <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">Nombre</td>
+                <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">Precio</td>
+                <td style="font-size:15px; font-weight: bold; color:black; text-align: center;">Cantidad</td>
+            </thead>
+            <tbody>
+                {% if request.session.carrito.items %}
+                    {% for key, value in request.session.carrito.items %} 
+                        <tr>
+                            <td style="font-size:13px">{{ value.nombre }}</td>
+                            <td style="font-size:13px">{{ value.precio }}</td>
+                            <td style="font-size:13px">{{ value.cantidad}}
+                                <br>
+                                <a href="{% url 'añadir_carrito' value.id %}" class="btn btn-primary">+</a>
+                                <a href="{% url 'quitar_carrito' value.id %}" class="btn btn-warning">-</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Total : </th>
+                            <td colspan="2">$ {{value.total}}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3">
+                        <div class="alert alert-info text-center" style="font-weight: bold;">Sin Productos</div>
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <hr>
+    </div>
+    <div class="row text-center">
+        <div class="col-6">
+            <a href="{% url 'limpiar_carrito' %}" class="btn btn-warning">Limpiar</a> 
+           </div> 
+           <div class="col-6">
+            <a href="{% url 'generarBoleta' %}" class="btn btn-primary">Comprar</a>
+        </div>
+    </div>
+
+    <!-- fin carrito -->
+
+
+
+
+
+
+
+
+    {% load humanize %}
+    <section class="section"> <!--apertura de seccion para la galeria de imagenes -->
+        {% for p in entity %}
+        <div class="card" onclick="voltear(this)">    <!--clase card (añade formatos ) -->
+            <div class="card-container"> <!-- clase contenedora -->
+                <div class="card-face front-face"> <!--clase de cara frontal de nuestra imagen -->
+                    {% if p.imagen %}
+                    <img src="{{ p.imagen.url }}" alt=""> <!--source de la imagen -->
+                    {% endif %}
+                </div>
+                <div class="card-face back-face"> <!--clase de la parte trasera de la imagen -->
+                    <div class="contenedor-info"> <!-- clase que tendra el formato de la info en la parte trasera-->
+                        <h4>id:{{ p.id }}</h4>
+                        <h2>{{ p.nombre | title }}</h2> <!--Titulo de la imagen  -->
+                        <p>{{ p.descripcion }}</p><!--Breve descripcion de esta -->
+                        <h4>${{ p.precio | intcomma }}</h4>
+                        <a href="{% url 'añadir_carrito' p.id %}" class="btn btn-success">Agregar <i class="bi bi-basket2-fill"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        {% endfor %}  
+    </section>
+
+    <div>
+        {% include 'web/paginator.html' %}
+    </div>   
+    
+
+
+    <!-- Fin de imagenes -->
+
+
+
+    <!-- Inicio Footer -->
+    <footer class="pie">
+        <div class="grupo-1">
+            <div class="caja">
+                <figure>
+                    <img src="{% static '/imgs/logo-xan-proxy.png' %}" alt="logo xan proxy">
+                </figure>
+            </div>
+            <div class="caja">
+                <h2>Integrantes</h2>
+                <p>Sthefanie "Sami" Castro</p>
+                <p>Jonathan "Dexus" Choque</p>
+                <p>Diego "Miza" Pacheco</p>
+            </div>
+            <div class="caja">
+                <h2>Siguenos</h2>
+                <div class="redes">
+                    <a href="https://github.com/MizaBard" target="_blank"><i class="bi bi-github"></i></a>
+                    <a href="https://www.instagram.com/purenonsince/" target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a href="https://twitter.com/MizaSenpai" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="grupo-2">
+            <small>&copy; 2024 <b>Xan Proxy</b> - Todos los derechos reservados.</small>
+        </div>
+    </footer>
+    <!-- Fin Footer -->
+    <!-- evento javascript que ocurre cuando manipulas el ancho de nuestra pagina -->
+    <!-- inicio de funciones de javascript -->
+    <script>
+        function showSidebar(){
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'flex'
+        }
+        function hideSidebar(){
+            const sidebar = document.querySelector('.sidebar')
+            sidebar.style.display = 'none'
+        }
+        function voltear(card){
+            card.querySelector('.card-container').classList.toggle('is-flipped')
+        }
+
+    </script>
+    <!-- fin de las funciones de javascript -->
+</body>
+</html>
